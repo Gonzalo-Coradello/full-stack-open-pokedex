@@ -1,0 +1,11 @@
+A team of six developers is working on an application that is soon to be released. The development is being carried out in ASP.NET Core with the C# programming language. The team is currently discussing the CI/CD strategy to implement.
+
+In a C# development environment, several tools facilitate common Continuous Integration (CI) steps such as linting, testing, and building. For linting, SonarLint is a popular third-party tool commonly used by C# developers, along with StyleCop, which is employed to enforce coding style conventions. xUnit is frequently used for unit testing, as well as dotnet test, and the building step is handled by the .NET compiler.
+
+While Jenkins and GitHub Actions are widely adopted CI/CD solutions, there are alternatives available. TeamCity, a JetBrains product, offers a user-friendly interface and seamlessly supports C# projects. Azure DevOps, integrated with Azure Pipelines, is another robust option that provides end-to-end CI/CD capabilities. GitLab is a GitHub alternative that offers a powerfull CI solution loved by its users.
+
+The decision to opt for a self-hosted or cloud-based CI environment depends on various factors. In a self-hosted setup, the team has more control over infrastructure, security policies, and custom tooling. This can be advantageous if specific requirements demand a high degree of customization. However, self-hosted setups may require additional maintenance efforts and resources.
+
+On the other hand, cloud-based CI solutions, such as GitHub Actions or Azure Pipelines, offer scalability, ease of use, and integration with other cloud services. They eliminate the need for managing infrastructure and provide a convenient pay-as-you-go model. The decision should consider factors like budget constraints, scalability requirements, and the team's familiarity with managing infrastructure.
+
+In this particular case, given that the team consists of only six people and that the application is not yet in production, they would likely benefit more from using a cloud-based environment, which should be cheaper and easier to set up and maintain. If the application and the team grow in the future, they can always switch to a self-hosted environment if it better suits their needs.
