@@ -15,6 +15,8 @@ primary_region = "scl"
   processes = ["app"]
 
 [[services]]
+  processes = ["app"]
+
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
@@ -31,6 +33,9 @@ primary_region = "scl"
     tls_skip_verify = false
     [services.http_checks.headers]
 
+  [services.processes]
+    app = "node app.js"
+
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
@@ -38,9 +43,6 @@ primary_region = "scl"
 
 [deploy]
   release_command = "npm run build"
-
-[processes]
-  app = "node app.js"
 
 [build]
   [build.args]
