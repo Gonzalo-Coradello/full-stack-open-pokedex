@@ -33,8 +33,7 @@ primary_region = "scl"
     tls_skip_verify = false
     [services.http_checks.headers]
 
-  [services.processes]
-    app = "node app.js"
+  app = "node app.js"
 
 [[vm]]
   cpu_kind = "shared"
