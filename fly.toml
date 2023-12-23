@@ -23,6 +23,7 @@ primary_region = "scl"
 
 [[services]]
   internal_port = 8080
+  protocol = "tcp"
   auto_stop_machines = true
   auto_start_machines = true
   processes = ["app"]
