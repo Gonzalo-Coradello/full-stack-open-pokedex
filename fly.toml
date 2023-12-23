@@ -21,12 +21,8 @@ primary_region = "scl"
   [build.args]
     NODE_VERSION = "16.19.0"
 
-[experimental]
-  auto_rollback = true
-
 [[services]]
   internal_port = 8080
-  protocol = "tcp"
   auto_stop_machines = true
   auto_start_machines = true
   processes = ["app"]
