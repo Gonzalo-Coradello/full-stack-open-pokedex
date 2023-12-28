@@ -29,6 +29,6 @@ jobs:
         run: |
           echo "$CONTAINS_SKIP"
           echo "${{ env.CONTAINS_SKIP }}"
-          echo "${{ !env.CONTAINS_SKIP }}"
+          echo "${{ env.CONTAINS_SKIP == 'false' }}"
           echo "${{ github.event_name == 'push' }}"
-          echo "${{ github.event_name == 'push' && !env.CONTAINS_SKIP }}"
+          echo "${{ github.event_name == 'push' && env.CONTAINS_SKIP == 'false' }}"
