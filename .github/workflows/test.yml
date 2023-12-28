@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+
 jobs:
   a_test_job:
     runs-on: ubuntu-20.04
@@ -20,5 +23,8 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: check if condition
+        run: echo "$CONTAINS_SKIP"
+        run: echo "${{ github.event_name == 'push' && !env.CONTAINS_SKIP }}"
