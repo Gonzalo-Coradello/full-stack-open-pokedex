@@ -20,39 +20,51 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          
       - name: Install dependencies
         run: npm install
+
       - name: Check style
         run: npm run eslint
+
       - name: Build
         run: npm run build
+
       - name: Run tests
         run: npm run test
+
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:8080
+
       - name: Deploy
         run:  flyctl deploy --remote-only
         if: ${{ github.event_name == 'push' && env.CONTAINS_SKIP == 'false' }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
       - name: Successful deployment
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
           severity: info
-          details: Deployment succeeded!
+          text: A new version of Pokedex deployed
+          details: to ${{ github.repository }} by ${{ github.event.head_commit.author.username }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Unsuccessful deployment
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Deployment failed
+          text: Build failed
+          description: commit
+          details: https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.head_commit.author.username }} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
