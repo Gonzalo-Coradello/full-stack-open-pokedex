@@ -5,6 +5,7 @@ const app = express()
 const PORT = process.env.PORT || 8080
 
 app.get('/health', (req, res) => {
+  throw new Error('Something went wrong')
   res.send('ok')
 })
 
