@@ -3,7 +3,10 @@ name: Testing stuff
 on:
   push:
     branches:
-      - main
+      - master
+
+env:
+  CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
 
 jobs:
   a_test_job:
@@ -22,3 +25,10 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: check if condition
+        run: |
+          echo "$CONTAINS_SKIP"
+          echo "${{ env.CONTAINS_SKIP }}"
+          echo "${{ env.CONTAINS_SKIP == 'false' }}"
+          echo "${{ github.event_name == 'push' }}"
+          echo "${{ github.event_name == 'push' && env.CONTAINS_SKIP == 'false' }}"
